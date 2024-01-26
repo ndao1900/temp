@@ -120,10 +120,14 @@ function App(){
     }
   };
 
+  const updateStageSize = () => {
+    setStageSize([liveViewRef.current.offsetWidth, liveViewRef.current.offsetHeight - 30])
+  }
+
   useEffect(() => {
     const handleResize = () => {
       if(liveViewRef.current != null){
-        setStageSize([liveViewRef.current.offsetWidth, liveViewRef.current.offsetHeight - 30])
+        updateStageSize()
       }
     };
 
@@ -202,6 +206,9 @@ function App(){
           </Layer>
         </Stage>
         <Webcam
+          onPlay={() => {
+            updateStageSize()
+          }}
           style={{transform: 'rotateY(180deg)'}}
           audio={false}
           ref={webcamRef}
